@@ -1,0 +1,16 @@
+name: RandomKits
+version: '1.0'
+main: dev.addition.randomkits.RandomKits
+api-version: '1.21'
+authors: [ 3add ]
+description: The RandomKits experience by 3add
+dependencies:
+  server:
+    packetevents:
+      load: BEFORE
+      required: true
+      join-classpath: true
+    CommandAPI:
+      load: BEFORE
+      required: true
+      join-classpath: true
