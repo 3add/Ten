@@ -1,6 +1,6 @@
-name: RandomKits
+name: Ten
 version: '1.0'
-main: dev.addition.randomkits.RandomKits
+main: dev.addition.ten.Ten
 api-version: '1.21'
 authors: [ 3add ]
 description: The RandomKits experience by 3add
@@ -13,4 +13,8 @@ dependencies:
     CommandAPI:
       load: BEFORE
       required: true
+      join-classpath: true
+    FastAsyncWorldEdit:
+      load: BEFORE
+      required: false
       join-classpath: true

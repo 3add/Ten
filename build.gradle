@@ -16,6 +16,11 @@ repositories {
         url = "https://repo.papermc.io/repository/maven-public/"
     }
 
+    maven {
+        name = "enginehub-repo"
+        url = "https://maven.enginehub.org/repo/"
+    }
+
     maven { // Code MC for: packetevents
         name = "code-mc-repo"
         url = "https://repo.codemc.io/repository/maven-releases/"
@@ -24,16 +29,28 @@ repositories {
 
 dependencies {
     paperweight.paperDevBundle("1.21.11-R0.1-SNAPSHOT") // Paper + Internals
-
+    implementation(platform("com.intellectualsites.bom:bom-newest:1.55"))
     implementation("com.zaxxer:HikariCP:7.0.2") // HikariCP
 
     compileOnly("com.github.retrooper:packetevents-spigot:2.9.5") // packetevents
     compileOnly("dev.jorel:commandapi-paper-core:11.1.0") // Command API
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core")
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit")
 }
 
 shadowJar {
     archiveClassifier.set('')
-    relocate('com.zaxxer.hikari', 'threeadd.randomkits.hikari')
+    relocate('com.zaxxer.hikari', 'threeadd.ten.hikari')
+}
+
+configurations.all {
+    resolutionStrategy {
+        dependencySubstitution {
+            substitute(module("org.lz4:lz4-java"))
+                    .using(module("at.yawk.lz4:lz4-java:1.8.1"))
+                    .because("Paper provides lz4-java via at.yawk.lz4")
+        }
+    }
 }
 
 runServer {
